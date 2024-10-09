@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transações de Recebimento</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+
+</head>
+<body class="bg-gray-100">
+
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <h1>PixApi</h1>
+        </div>
+        <nav class="menu">
+            <ul class="menu-list">
+                <li><a class="menu-item" href="/">Home</a></li>
+                <li><a class="menu-item" href="/pix-form">Pix</a></li>
+                <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
+                <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
+                <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
+                <li><a class="menu-item" href="#">Informações da Conta</a></li>
+            </ul>
+        </nav>
+        <div class="logout-button">
+            <button class="btn-logout">Sair da conta</button>
+        </div>
+    </div>
+    
+    <div class="content-wrapper">
+        <button id="toggle-sidebar" class="toggle-button" aria-label="Toggle sidebar">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        
+        <!-- Form Section -->
+        <div class="container mx-auto mb-10 p-6 bg-white rounded-lg shadow-md mt-10">
+            <h2 class="text-2xl font-semibold mb-6 text-center">Buscar Transações</h2>
+            <form action="{{url_for('home_controller.recebment_transactions')}}" method="POST" class="space-y-4">
+                {{form.hidden_tag()}}
+                <div>
+                    <label for="date" class="block text-gray-700">Data para busca:</label> 
+                    {{form.date(class='form-control w-full p-2 mt-2 border rounded-lg', placeholder='Digite a data para busca.')}}
+                </div>
+                <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 w-full" type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <!-- Transaction List Section -->
+        <div class="container mx-auto mt-10 space-y-4">
+            {% for transaction in transations %}
+            <div class="p-4 bg-white rounded-lg shadow-md">
+                <div class="space-y-2">
+                    <p><span class="font-semibold">ID do Remetente:</span> {{transaction.id_payer}}</p>
+                    <p><span class="font-semibold">Nome do Remetente:</span> {{transaction.name_payer}}</p>
+                    <p><span class="font-semibold">ID do Recebedor:</span> {{transaction.id_receiver}}</p>
+                    <p><span class="font-semibold">Nome do Recebedor:</span> {{transaction.name_receiver}}</p>
+                    <p><span class="font-semibold">Quantia:</span> R$ {{transaction.amount}}</p>
+                    <p><span class="font-semibold">Data:</span> {{transaction.date}}</p>
+                    <p><span class="font-semibold">ID da Transação:</span> {{transaction.id_transaction}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Remove the existing script tag for menu handling -->
+    <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+</body>
+</html>

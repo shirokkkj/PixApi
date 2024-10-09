@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprovante de Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/comprovante.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="comprovante">
+        <h1 class="title">Comprovante <span class="pix">PIX</span></h1>
+        <div class="infos-comprovante">
+            <h2 class="title-comprovante">Sobre a Transação</h2>
+            <p class="info">Data do Pagamento:  <strong>{{weekday}}, {{date}}</strong></p>
+            <p class="info">Hora do Pagamento: <strong>{{hour}}</strong></p>
+            <p class="info">ID da transação: <strong>{{transaction_id}}</strong></p>
+        </div>
+        <hr>
+        <div class="infos-receiver">
+            <h2 class="title-comprovante">Sobre o recebedor</h2>
+            <p class="info">Nome do recebedor: <strong>{{payee}}</strong></p>
+            <p class="info">Chave pix: <strong>{{secret_key}}</strong></p>
+        </div>
+        <hr>
+        <div class="infos-sender">
+            <h2 class="title-comprovante">Sobre o sender</h2>
+            <p class="info">Nome do sender: <strong>{{payer}}</strong></p>
+            <p class="info">Valor enviado: <strong>{{amount}}</strong></p>
+        </div>
+    </div>
+</body>
+</html>

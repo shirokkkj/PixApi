@@ -1,0 +1,39 @@
+header {
+    width: 100%;
+    padding: 20px 8%;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar .title {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .title .pix {
+    color: rgb(17, 180, 17);
+    font-size: 40px;
+}
+
+.elements-list {
+    display: flex;
+    list-style: none;
+    gap: 32px; /* Ajusta o espaço entre os itens */
+    margin: 0; /* Remove margens extras */
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Ajusta a distribuição dos itens da navbar */
+.navbar {
+    justify-content: space-between;
+}

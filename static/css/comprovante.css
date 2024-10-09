@@ -1,0 +1,55 @@
+/* Estilização do body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Fundo suave */
+    color: #333; /* Cor do texto */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilização do comprovante */
+.comprovante {
+    background-color: #fff; /* Fundo branco para o comprovante */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px;
+    max-width: 600px; /* Largura máxima */
+    margin: auto; /* Centraliza o comprovante */
+}
+
+/* Estilização do título principal */
+.title {
+    font-size: 24px;
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px;
+}
+
+/* Estilização do título da seção */
+.title-comprovante {
+    font-size: 20px;
+    margin-bottom: 10px; /* Espaço abaixo do título */
+    color: rgb(17, 180, 17); /* Cor do título */
+}
+
+/* Estilização das informações */
+.info {
+    font-size: 16px;
+    margin: 5px 0; /* Espaço acima e abaixo */
+}
+
+/* Estilização do span "PIX" */
+.pix {
+    color: #17B978; /* Cor verde para o texto PIX */
+}
+
+/* Estilização da linha horizontal */
+hr {
+    border: 1px solid #eee; /* Linha mais clara */
+    margin: 20px 0; /* Espaço acima e abaixo da linha */
+}
+
+
+.title-comprovante:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+    cursor: pointer; /* Muda o cursor para indicar que é interativo */
+}

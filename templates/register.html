@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            background-image: url('https://img.freepik.com/vetores-gratis/projetos-de-fundo-moderno-verde-gradiente_343694-2027.jpg?t=st=1728347880~exp=1728351480~hmac=122d25cac80c30fc31d49be0f2031f91b3647edb0748aa70bdb266ee663e9e9c&w=1380'); /* Caminho da imagem */
+            background-size: cover; /* Faz com que a imagem cubra toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Impede a repetição da imagem */
+            height: 100vh; /* Define a altura da página */
+            margin: 0; /* Remove margens padrão */
+            padding: 0;
+            font-family: 'Poppins', sans-serif; /* Ajusta a fonte da página */
+          }
+          
+          .container {
+            display: flex;
+            width: 100vw; /* A largura total da janela */
+            height: 100vh; /* Altura total da janela */
+          }
+          
+          .left-section {
+            flex: 1; /* Ocupa 50% da largura */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+          }
+          
+          .right-section {
+            flex: 1.2; /* Ocupa o outro 50% */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .left-section .title-left-section {
+            font-size: 45px;
+            color: white;
+          }
+
+          .left-section .description {
+            font-size: 25px;
+            font-weight: 500;
+            color: white;
+          }
+
+          .right-section .box-cpf {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            width: 340px;
+            border-radius: 8px;
+            height: 700px;
+            padding: 20px; /* Espaçamento interno da caixa */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+          }
+        
+        .title-box {
+            font-size: 24px; /* Tamanho da fonte do título */
+            color: #333333; /* Cor do texto do título */
+            margin-bottom: 15px; /* Espaço abaixo do título */
+            text-align: center; /* Centraliza o texto do título */
+        }
+        
+        .form-control {
+            border: none; /* Remove bordas padrão */
+            border-bottom: 2px solid #50bae4; /* Borda inferior */
+            outline: none; /* Remove borda de foco padrão */
+            padding: 10px 0; /* Espaçamento vertical interno */
+            font-size: 16px; /* Tamanho da fonte */
+            width: 100%; /* Faz o input ocupar 100% da largura */
+            margin-bottom: 25px; /* Espaço abaixo do input */
+        }
+        
+        .continue-button {
+            border-radius: 8px; /* Arredondamento dos cantos do botão */
+            border: none; /* Remove bordas padrão */
+            background-color: rgb(17, 180, 17); /* Cor de fundo do botão */
+            color: white; /* Cor do texto do botão */
+            padding: 10px; /* Espaçamento interno do botão */
+            font-size: 16px; /* Tamanho da fonte do botão */
+            cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+            width: 100%; /* Faz o botão ocupar 100% da largura */
+            transition: background-color 0.3s; /* Efeito de transição para a cor de fundo */
+            margin-top: 20px;
+        }
+        
+        .continue-button:hover {
+            background-color: #3a9bbf; /* Cor do botão ao passar o mouse */
+        }
+        
+        a {
+          text-decoration: none;
+          color: rgb(17, 180, 17);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1 class="title-left-section"> 
+                O controle do seu dinheiro <br> todo em um só lugar!
+            </h1>
+            <p class="description">
+                Transfira, receba, controle. Tudo com o <span style="color: rgb(15, 128, 15)">nosso</span> banco!
+            </p>
+        </div>
+        <div class="right-section">
+            <div class="box-cpf">
+                <h2 class="title-box">Quer fazer o seu cartão? Venha logo!</h2>
+                <form action="{{url_for('registration_controller.register')}}" method="POST">
+                  {{ form.hidden_tag() }}
+
+                    <label for="name">Digite seu nome completo</label>
+                    {{ form.name(class='form-control', placeholder='Digite seu nome completo') }}
+                    
+                    <!-- Senha -->
+                    <label for="password">Digite sua senha (16 caracteres)</label>
+                    {{ form.password(class='form-control', placeholder='Digite sua senha com 16 caracteres') }}
+
+                    <!-- CPF -->
+                    <label for="cpf">Digite seu CPF (somente números)</label>
+                    {{ form.cpf(class='form-control', placeholder='Digite seu CPF (11 dígitos)') }}
+
+                    <!-- E-mail -->
+                    <label for="email">Digite seu e-mail</label>
+                    {{ form.email(class='form-control', placeholder='Digite seu e-mail') }}
+                    
+                    <!-- Telefone -->
+                    <label for="phone">Digite seu número de telefone</label>
+                    {{ form.phone(class='form-control', placeholder='Digite seu telefone') }}
+                    
+                    <!-- Aceitar Termos -->
+                    <div>
+                        {{ form.accept_terms() }}
+                        <label for="accept_terms">Eu aceito os <a href="#">Termos de Uso</a></label>
+                    </div>
+
+                    <!-- Botão de envio -->
+                    <button type="submit" class="continue-button">Continuar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

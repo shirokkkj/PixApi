@@ -1,0 +1,90 @@
+.main {
+    padding-inline: 25px;
+}
+
+.container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    margin-top: 25px;
+}
+
+.balance-container {
+    display: flex;               
+    justify-content: space-between; 
+    align-items: center;      
+    margin-top: 10px;         
+}
+
+.mini-title {
+    margin-bottom: 10px;
+}
+
+.balance {
+    font-size: 34px;
+    margin-right: 10px;  
+}
+
+#eye {
+    font-size: 32px; 
+    cursor: pointer;    
+    transition: color 0.2ms ease;
+    transition: font-size 0.3 ease;
+}
+
+#eye:hover {
+    font-size: 40px;
+}
+
+.title-general {
+    font-size: 42px;
+    text-align: center;
+}
+.title-general .pix {
+    color: rgb(17, 180, 17);
+    font-size: 50px;
+}
+
+
+.actions {
+    margin-top: 25px;
+    padding-inline: 25px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions .action-item {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    margin-top: 25px;
+    transition: background-color 1s ease;
+    cursor: pointer;
+}
+
+.action-item:hover {
+    background-color: rgb(2, 54, 2);
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    color: rgb(17, 180, 17);
+    font-size: 18px;
+}
+
+.active {
+    color: rgb(17, 180, 17);
+}
+
+.hide {
+    background-color: black;
+}
+
+
