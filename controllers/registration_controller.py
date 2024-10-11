@@ -22,7 +22,10 @@ def register():
         
         data = {
             'name': form.name.data,
-            'balance': user.balance
+            'balance': user.balance,
+            'registered_cpf_key': user.registered_cpf_key,
+            'registered_email_key': user.registered_email_key,
+            'registered_phone_key': user.registered_phone_key
         }
         
         infos_user = json.dumps(data)

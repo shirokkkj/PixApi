@@ -98,3 +98,7 @@ def recebment_transactions():
 @home_controller.route('/create_pix_key')
 def create_pix_key():
     return render_template('create_pix_key.html')
+
+@home_controller.route('/select-pix-form')
+def select_pix_form():
+    return render_template('select_pix.html')

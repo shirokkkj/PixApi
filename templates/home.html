@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -16,9 +17,10 @@
         <nav class="menu">
             <ul class="menu-list">
                 <li><a class="menu-item" href="/">Home</a></li>
-                <li><a class="menu-item" href="/pix-form">Pix</a></li>
+                <li><a class="menu-item" href="/select-pix-form">Pix</a></li>
                 <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
                 <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
+                <li><a class="menu-item" href="/cpf-key-form">Registrar Chave Pix</a></li>
                 <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
                 <li><a class="menu-item" href="#">Informações da Conta</a></li>
             </ul>
@@ -28,52 +30,54 @@
         </div>
     </div>
     
-    <div class="content-wrapper">
+    <div class="content-wrapper flex flex-col p-4">
         <button id="toggle-sidebar" class="toggle-button" aria-label="Toggle sidebar">
             <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
-    <h1 class="title-general"><span class="pix">Pix</span>Api</h1>
 
-    <div class="main w-full">
-        <h1 class="title">Bem-vindo ao seu banco, {{name}}</h1>
-        <div class="container">
-            <span class="mini-title">Saldo em Conta</span>
-            <div class="balance-container"> <!-- Novo contêiner para saldo e ícone -->
-                <h2 class="balance"> R$ {{balance}} </h2>
-                <i class='bx bx-low-vision' id="eye"></i>
+        <h1 class="title-general text-3xl lg:text-4xl font-bold mb-6 text-center"><span class="pix text-green-600">Pix</span>Api</h1>
+
+        <div class="main w-full">
+            <h1 class="title text-2xl lg:text-3xl font-semibold mb-6">Bem-vindo ao seu banco, {{name}}</h1>
+
+            <div class="container bg-white p-4 rounded-lg shadow-md">
+                <span class="mini-title text-lg font-medium">Saldo em Conta</span>
+                <div class="balance-container flex items-center justify-between mt-4">
+                    <h2 class="balance text-2xl lg:text-3xl font-bold">R$ {{balance}}</h2>
+                    <i class='bx bx-low-vision text-2xl lg:text-3xl' id="eye"></i>
+                </div>
             </div>
+
+            <ul class="actions mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="{{url_for('home_controller.pix_form')}}">
+                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="sm:text-sm">Pix</p>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="sm:text-sm">Minhas chaves</p>
+                    </li>
+                </a>
+                <a href="{{url_for('home_controller.payment_transactions')}}">
+                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="sm:text-sm">Transações de Pagamento</p>
+                    </li>
+                </a>
+                <a href="{{url_for('home_controller.recebment_transactions')}}">
+                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="sm:text-sm">Transações de Recebimento</p>
+                    </li>
+                </a>
+                <a href="#">
+                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p>Informações da Conta</p>
+                    </li>
+                </a>
+            </ul>
         </div>
-        <ul class="actions">
-            <a href="{{url_for('home_controller.pix_form')}}">
-                <li class="action-item">
-                    <p>Pix</p>
-                </li>
-            </a>
-            <a href="#">
-                <li class="action-item">
-                    <p>Minhas chaves</p>
-                </li>
-            </a>
-            <a href="{{url_for('home_controller.payment_transactions')}}">
-
-                <li class="action-item">
-                    <p>Transações de Pagamento</p>
-                </li>
-            </a>
-            <a href="{{url_for('home_controller.recebment_transactions')}}">
-
-                <li class="action-item">
-                    <p>Transações de Recebimento</p>
-                </li>
-            </a>
-            <a href="#">
-                <li class="action-item">
-                    <p>Informações da Conta</p>
-                </li>
-            </a>
-        </ul>
     </div>
 
     <script src="{{ url_for('static', filename='js/cru.js') }}"></script>

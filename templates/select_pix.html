@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha a Forma de Pagamento Pix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <style>
+        body {
+            background-color: #f3f4f6; /* Cor de fundo suave */
+        }
+        .payment-option {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .payment-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        .payment-icon {
+            color: #22c55e; /* Cor verde do ícone */
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <h1>PixApi</h1>
+        </div>
+        <nav class="menu">
+            <ul class="menu-list">
+                <li><a class="menu-item" href="/">Home</a></li>
+                <li><a class="menu-item" href="/pix-form">Pix</a></li>
+                <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
+                <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
+                <li><a class="menu-item" href="/cpf-key-form">Registrar Chave Pix</a></li>
+                <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
+                <li><a class="menu-item" href="#">Informações da Conta</a></li>
+            </ul>
+        </nav>
+        <div class="logout-button">
+            <button class="btn-logout">Sair da conta</button>
+        </div>
+    </div>
+    <div class="container mx-auto text-center">
+        <h1 class="title mb-8">Escolha a Forma de Pagamento Pix</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- CPF -->
+            <div class="payment-option p-6 text-center">
+                <i class="bx bx-id-card text-5xl payment-icon mb-4"></i>
+                <h2 class="text-lg font-semibold text-gray-700">CPF</h2>
+            </div>
+
+            <!-- E-mail -->
+            <div class="payment-option p-6 text-center">
+                <i class="bx bx-envelope text-5xl payment-icon mb-4"></i>
+                <h2 class="text-lg font-semibold text-gray-700">E-mail</h2>
+            </div>
+
+            <!-- Chave Secreta -->
+            <div class="payment-option p-6 text-center">
+                <i class="bx bx-key text-5xl payment-icon mb-4"></i>
+                <h2 class="text-lg font-semibold text-gray-700">Chave Secreta</h2>
+            </div>
+
+            <!-- Número de Telefone -->
+            <div class="payment-option p-6 text-center">
+                <i class="bx bx-phone text-5xl payment-icon mb-4"></i>
+                <h2 class="text-lg font-semibold text-gray-700">Número de Telefone</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

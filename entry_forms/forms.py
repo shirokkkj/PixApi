@@ -17,3 +17,6 @@ class RegistrationForm(FlaskForm):
     email = EmailField(validators=[DataRequired()])
     phone = StringField(validators=[DataRequired()])
     accept_terms = BooleanField(validators=[DataRequired()])
+    
+class RegisterCpfKeyForm(FlaskForm):
+    password = PasswordField(validators=[DataRequired(), Length(min=16, max=16)])

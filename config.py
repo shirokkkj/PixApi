@@ -34,7 +34,9 @@ def create_app():
     from controllers.home_controller import home_controller
     from controllers.views import views_controller
     from controllers.registration_controller import registrations_controller
+    from controllers.pix_keys_controller import pix_keys_controller
     app.register_blueprint(home_controller)
     app.register_blueprint(views_controller)
     app.register_blueprint(registrations_controller)
+    app.register_blueprint(pix_keys_controller)
     return app

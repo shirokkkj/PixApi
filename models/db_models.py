@@ -7,11 +7,15 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255), nullable = False, unique = True)
     password = db.Column(db.String(255), nullable = False, unique = True)
-    cpf = db.Column(db.String(70), nullable = False, unique = True)
+    cpf = db.Column(db.String(255), nullable = False, unique = True)
     email = db.Column(db.String(255), nullable = False, unique = True)
     phone = db.Column(db.String(255), nullable=False, unique=True)
     balance = db.Column(db.Float, nullable=True, default=0.0)
-    key_pix = db.Column(db.String(255), nullable=True)
+    secret_key = db.Column(db.String(255), nullable=True)
+    registered_cpf_key = db.Column(db.Boolean, default=False)
+    registered_email_key = db.Column(db.Boolean, default=False)
+    registered_phone_key = db.Column(db.Boolean, default=False)
+
     
     def create_user(name, password, cpf, email, phone):
         user = User(name=name, password=password, cpf=cpf, email=email, phone=phone)
@@ -27,10 +31,8 @@ class User(db.Model):
         return User.query.filter_by(key_pix=secret_key).first()
     
     def get_user_data(id):
-        user = User.find_by_id(id)
         
-        return {'name': user.name, 'cpf': user.cpf, 'balance': user.balance}
-    
+        return User.find_by_id(id)
     
     def make_transaction(payer_id, secret_key, quantity):
         payer = User.find_by_id(payer_id)
@@ -54,6 +56,8 @@ class User(db.Model):
         
         db.session.commit()
         return {'status': 'success', 'payer': payer.name, 'payee': payee.name, 'quantity': quantity}
+    
+    
         
     
 class Transactions(db.Model):

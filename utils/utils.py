@@ -3,6 +3,11 @@ import phonenumbers
 import hashlib
 from config import redis_connection
 import json
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 def update_user_balance(redis_connection, user_id, amount, is_payer=True):
@@ -27,11 +32,24 @@ def hash_password(password):
     
     return encrypted_data
 
+
+def check_password(plain_password, hashed_password):
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+
+
+
 def encrypt_data(data):
-    encoded_data = str(data).encode('utf-8')
-    encrypted_data = hashlib.sha256(encoded_data)
+    fernet = Fernet(b'qvxUbHNUIbPapuAssbVZgtjFpHF_YzkEyGPXnftLXEk=')
+    data_encoded = fernet.encrypt(data.encode('utf-8'))
     
-    return str(encrypted_data.hexdigest())
+    return data_encoded
+
+def uncrypt_data(data):
+    fernet = Fernet(b'qvxUbHNUIbPapuAssbVZgtjFpHF_YzkEyGPXnftLXEk=')
+    data_uncoded = fernet.decrypt(data).decode()
+    
+    return data_uncoded
+
 def verify_data(stored_data, data):
     data_encryptografed = encrypt_data(data)
     
