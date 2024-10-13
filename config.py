@@ -8,7 +8,7 @@ from redis_utils.redis_methods import RedisMethodsHandler
 
 db = SQLAlchemy()
 
-redis_connection = RedisConnectionHandler(f'{os.getenv('REDIS_HOST')}', os.getenv('REDIS_PORT'), os.getenv('REDIS_DB')).make_connection()
+redis_connection = RedisConnectionHandler(f'localhost', 6379, 0).make_connection()
 redis_methods_connection = RedisMethodsHandler(redis_connection)
 
 def create_app():
@@ -35,8 +35,10 @@ def create_app():
     from controllers.views import views_controller
     from controllers.registration_controller import registrations_controller
     from controllers.pix_keys_controller import pix_keys_controller
+    from controllers.pix_controller import pix_controller
     app.register_blueprint(home_controller)
     app.register_blueprint(views_controller)
     app.register_blueprint(registrations_controller)
     app.register_blueprint(pix_keys_controller)
+    app.register_blueprint(pix_controller)
     return app

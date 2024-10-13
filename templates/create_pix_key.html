@@ -17,9 +17,10 @@
         <nav class="menu">
             <ul class="menu-list">
                 <li><a class="menu-item" href="/">Home</a></li>
-                <li><a class="menu-item" href="/pix-form">Pix</a></li>
+                <li><a class="menu-item" href="/select-pix-form">Pix</a></li>
                 <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
                 <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
+                <li><a class="menu-item" href="/create_pix_key">Registrar Chave Pix</a></li>
                 <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
                 <li><a class="menu-item" href="#">Informações da Conta</a></li>
             </ul>
@@ -28,9 +29,9 @@
             <button class="btn-logout">Sair da conta</button>
         </div>
     </div>
-    
-    <div class="content-wrapper">
-        <button id="toggle-sidebar" class="toggle-button" aria-label="Toggle sidebar">
+
+    <div class="content-wrapper flex flex-col p-4 w-full">
+        <button id="toggle-sidebar" class="toggle-button fixed top-4 left-4 z-50" aria-label="Toggle sidebar">
             <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -38,21 +39,21 @@
     <div class="container mx-auto px-4 py-8">
         <h2 class="text-2xl font-bold mb-6 text-center">Escolha o tipo de chave PIX</h2>
         <div class="space-y-4">
-            <a href="#" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <a href="{{url_for('pix_keys_controller.cpf_key_form')}}" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center p-4">
                     <i class='bx bxs-id-card text-3xl text-green-500 mr-4'></i>
                     <span class="text-lg font-semibold flex-grow">CPF</span>
                     <i class='bx bx-chevron-right text-2xl text-gray-400'></i>
                 </div>
             </a>
-            <a href="#" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <a href="{{url_for('pix_keys_controller.phone_key_form')}}" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center p-4">
                     <i class='bx bxs-phone text-3xl text-green-500 mr-4'></i>
                     <span class="text-lg font-semibold flex-grow">Celular</span>
                     <i class='bx bx-chevron-right text-2xl text-gray-400'></i>
                 </div>
             </a>
-            <a href="#" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <a href="{{url_for('pix_keys_controller.email_key_form')}}" class="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center p-4">
                     <i class='bx bxs-envelope text-3xl text-green-500 mr-4'></i>
                     <span class="text-lg font-semibold flex-grow">E-mail</span>

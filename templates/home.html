@@ -20,7 +20,7 @@
                 <li><a class="menu-item" href="/select-pix-form">Pix</a></li>
                 <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
                 <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
-                <li><a class="menu-item" href="/cpf-key-form">Registrar Chave Pix</a></li>
+                <li><a class="menu-item" href="/create_pix_key">Registrar Chave Pix</a></li>
                 <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
                 <li><a class="menu-item" href="#">Informações da Conta</a></li>
             </ul>
@@ -30,50 +30,50 @@
         </div>
     </div>
     
-    <div class="content-wrapper flex flex-col p-4">
-        <button id="toggle-sidebar" class="toggle-button" aria-label="Toggle sidebar">
+    <div class="content-wrapper flex flex-col p-4 w-full">
+        <button id="toggle-sidebar" class="toggle-button fixed top-4 left-4 z-50" aria-label="Toggle sidebar">
             <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
 
-        <h1 class="title-general text-3xl lg:text-4xl font-bold mb-6 text-center"><span class="pix text-green-600">Pix</span>Api</h1>
+        <h1 class="title-general text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-center"><span class="pix text-green-600">Pix</span>Api</h1>
 
-        <div class="main w-full">
-            <h1 class="title text-2xl lg:text-3xl font-semibold mb-6">Bem-vindo ao seu banco, {{name}}</h1>
+        <div class="main w-full max-w-4xl mx-auto px-4 sm:px-6">
+            <h1 class="title text-xl sm:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6">Bem-vindo ao seu banco, {{name}}</h1>
 
-            <div class="container bg-white p-4 rounded-lg shadow-md">
-                <span class="mini-title text-lg font-medium">Saldo em Conta</span>
-                <div class="balance-container flex items-center justify-between mt-4">
-                    <h2 class="balance text-2xl lg:text-3xl font-bold">R$ {{balance}}</h2>
-                    <i class='bx bx-low-vision text-2xl lg:text-3xl' id="eye"></i>
+            <div class="container bg-white p-3 sm:p-4 rounded-lg shadow-md">
+                <span class="mini-title text-base sm:text-lg font-medium">Saldo em Conta</span>
+                <div class="balance-container flex items-center justify-between mt-2 sm:mt-4">
+                    <h2 class="balance text-xl sm:text-2xl lg:text-3xl font-bold">R$ {{balance}}</h2>
+                    <i class='bx bx-low-vision text-xl sm:text-2xl lg:text-3xl cursor-pointer' id="eye"></i>
                 </div>
             </div>
 
-            <ul class="actions mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="{{url_for('home_controller.pix_form')}}">
-                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
-                        <p class="sm:text-sm">Pix</p>
+            <ul class="actions mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <a href="{{url_for('home_controller.pix_form')}}" class="w-full">
+                    <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="text-sm sm:text-base">Pix</p>
                     </li>
                 </a>
-                <a href="#">
-                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
-                        <p class="sm:text-sm">Minhas chaves</p>
+                <a href="#" class="w-full">
+                    <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="text-sm sm:text-base">Minhas chaves</p>
                     </li>
                 </a>
-                <a href="{{url_for('home_controller.payment_transactions')}}">
-                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
-                        <p class="sm:text-sm">Transações de Pagamento</p>
+                <a href="{{url_for('home_controller.payment_transactions')}}" class="w-full">
+                    <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="text-sm sm:text-base">Transações de Pagamento</p>
                     </li>
                 </a>
-                <a href="{{url_for('home_controller.recebment_transactions')}}">
-                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
-                        <p class="sm:text-sm">Transações de Recebimento</p>
+                <a href="{{url_for('home_controller.recebment_transactions')}}" class="w-full">
+                    <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="text-sm sm:text-xl">Transações de Recebimento</p>
                     </li>
                 </a>
-                <a href="#">
-                    <li class="action-item bg-green-600 text-white p-4 rounded-lg text-center hover:bg-green-500 transition">
-                        <p>Informações da Conta</p>
+                <a href="#" class="w-full">
+                    <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
+                        <p class="text-sm sm:text-base">Informações da Conta</p>
                     </li>
                 </a>
             </ul>

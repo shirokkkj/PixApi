@@ -39,10 +39,10 @@
         <nav class="menu">
             <ul class="menu-list">
                 <li><a class="menu-item" href="/">Home</a></li>
-                <li><a class="menu-item" href="/pix-form">Pix</a></li>
+                <li><a class="menu-item" href="/select-pix-form">Pix</a></li>
                 <li><a class="menu-item" href="/recebment-transactions">Transações de Recebimento</a></li>
                 <li><a class="menu-item" href="/payment-transactions">Transações de Pagamento</a></li>
-                <li><a class="menu-item" href="/cpf-key-form">Registrar Chave Pix</a></li>
+                <li><a class="menu-item" href="/create_pix_key">Registrar Chave Pix</a></li>
                 <li><a class="menu-item" href="#">Pagamento em Conjunto</a></li>
                 <li><a class="menu-item" href="#">Informações da Conta</a></li>
             </ul>
@@ -51,6 +51,13 @@
             <button class="btn-logout">Sair da conta</button>
         </div>
     </div>
+
+    <div class="content-wrapper flex flex-col p-4 w-full">
+        <button id="toggle-sidebar" class="toggle-button fixed top-4 left-4 z-50" aria-label="Toggle sidebar">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
     <div class="container mx-auto text-center">
         <h1 class="title mb-8">Escolha a Forma de Pagamento Pix</h1>
         
@@ -58,27 +65,30 @@
             <!-- CPF -->
             <div class="payment-option p-6 text-center">
                 <i class="bx bx-id-card text-5xl payment-icon mb-4"></i>
-                <h2 class="text-lg font-semibold text-gray-700">CPF</h2>
+                <h2 class="text-lg font-semibold text-gray-700"><a class="" href="{{url_for('pix_controller.pix_cpf')}}">CPF</a></h2>
             </div>
 
             <!-- E-mail -->
             <div class="payment-option p-6 text-center">
                 <i class="bx bx-envelope text-5xl payment-icon mb-4"></i>
-                <h2 class="text-lg font-semibold text-gray-700">E-mail</h2>
+                <h2 class="text-lg font-semibold text-gray-700"><a class="" href="{{url_for('pix_controller.pix_email')}}">Email</a></h2>
+
             </div>
 
             <!-- Chave Secreta -->
             <div class="payment-option p-6 text-center">
                 <i class="bx bx-key text-5xl payment-icon mb-4"></i>
-                <h2 class="text-lg font-semibold text-gray-700">Chave Secreta</h2>
+                <h2 class="text-lg font-semibold text-gray-700"><a class="" href="{{url_for('pix_controller.pix_secret_key')}}">Chave Secreta</a></h2>
             </div>
 
             <!-- Número de Telefone -->
             <div class="payment-option p-6 text-center">
                 <i class="bx bx-phone text-5xl payment-icon mb-4"></i>
-                <h2 class="text-lg font-semibold text-gray-700">Número de Telefone</h2>
+                <h2 class="text-lg font-semibold text-gray-700"><a class="" href="{{url_for('pix_controller.pix_phone')}}">Telefone</a></h2>
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
 </body>
 </html>
