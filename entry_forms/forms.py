@@ -19,4 +19,9 @@ class RegistrationForm(FlaskForm):
     accept_terms = BooleanField(validators=[DataRequired()])
     
 class PasswordConfirmForm(FlaskForm):
-    password = PasswordField(validators=[DataRequired(), Length(min=16, max=16)])
+    password = PasswordField(validators=[DataRequired(), Length(min=8, max=8)])
+    
+class SplitPaymentForm(FlaskForm):
+    pix_key = StringField(validators=[DataRequired(), Length(min=11, max=11)])
+    receiver_key = StringField(validators=[DataRequired()])
+    amount = FloatField(validators=[DataRequired(), NumberRange(min=0.01, message='O valor deve ser maior do que 0.')])

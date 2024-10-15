@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
@@ -51,7 +52,7 @@
             </div>
 
             <ul class="actions mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                <a href="{{url_for('home_controller.pix_form')}}" class="w-full">
+                <a href="{{url_for('home_controller.select_pix_form')}}" class="w-full">
                     <li class="action-item bg-green-600 text-white p-3 sm:p-4 rounded-lg text-center hover:bg-green-500 transition">
                         <p class="text-sm sm:text-base">Pix</p>
                     </li>
@@ -80,8 +81,69 @@
         </div>
     </div>
 
+    <div id="modal" class="fixed z-10 inset-0 hidden">
+        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-md w-full max-w-md">
+                <div class="flex justify-end">
+                    <i class="bx bx-x text-2xl cursor-pointer" id="button-close-modal"></i>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold text-green-600 mb-4 md:mb-6 text-center">Notificação de Pagamento</h3>
+                <div class="mb-4 md:mb-6">
+                    <p id="message"></p>
+                </div>
+                <button id="confirm-transaction" class="text-xl font-bold px-5 py-2 text-white bg-green-600">Confirmar</button>
+                <button id="recuse-transaction" class="text-xl font-bold px-5 py-2 text-white bg-red-600">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
     <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+
+    <script>
+        const socket = io.connect('http://' + document.domain + ':' + location.port)
+        const message = document.querySelector('#message')
+        const modal = document.querySelector('#modal')
+        const confirm_transaction = document.querySelector('#confirm-transaction')
+        const recuse_transaction = document.querySelector('#recuse-transaction')
+        const close_modal_button = document.querySelector('#button-close-modal')
+        
+
+        let id_transaction = null
+
+        let payer_id = null
+        let payee_cpf = null
+        let account_to_send = null
+        let quantity = null
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+        
+        
+        socket.on('notification', function(data) {
+            console.log('Sended')
+            modal.classList.remove('hidden')
+            message.innerHTML = `Você está recebendo um pedido de pagamento em conjunto de <strong>${data.sender}</strong>. <br> O valor dividido para dois será de: ${data.amount}. O recebedor será: ${data.account_to_send}. CPF: ${data.cpf_payee}`
+            id_transaction = data.id
+            payer_id = data.payer_id
+            payee_cpf = data.cpf_payee
+            account_to_send = data.account_to_send
+            quantity = data.amount
+        });
+
+        close_modal_button.addEventListener('click', () => {
+            modal.classList.add('hidden')
+        });
+
+        confirm_transaction.addEventListener('click', () => {
+            console.log('clicked!')
+            socket.emit('confirmed_transaction', {'quantity': quantity, 'id': id_transaction, 'payer_id': payer_id, 'payee_cpf': payee_cpf, 'account_to_send': account_to_send})
+        })
+        recuse_transaction.addEventListener('click', () => {
+            socket.emit('recused_transaction')
+        })
+    </script>
 
 </body>
 </html>

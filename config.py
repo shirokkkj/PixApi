@@ -4,9 +4,13 @@ from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from redis_utils.redis_manager import RedisConnectionHandler
 from redis_utils.redis_methods import RedisMethodsHandler
+from flask_socketio import SocketIO
 
 
 db = SQLAlchemy()
+socketio = SocketIO()
+
+
 
 redis_connection = RedisConnectionHandler(f'localhost', 6379, 0).make_connection()
 redis_methods_connection = RedisMethodsHandler(redis_connection)
@@ -24,6 +28,7 @@ def create_app():
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     db.init_app(app)
+    socketio.init_app(app)
     
     from models.db_models import User, Transactions
     
@@ -36,9 +41,11 @@ def create_app():
     from controllers.registration_controller import registrations_controller
     from controllers.pix_keys_controller import pix_keys_controller
     from controllers.pix_controller import pix_controller
+    from controllers.split_payment_controller import split_payment_controller
     app.register_blueprint(home_controller)
     app.register_blueprint(views_controller)
     app.register_blueprint(registrations_controller)
     app.register_blueprint(pix_keys_controller)
     app.register_blueprint(pix_controller)
+    app.register_blueprint(split_payment_controller)
     return app

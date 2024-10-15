@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixApi - Transaction Confirmed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes checkmark {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-checkmark {
+            animation: checkmark 0.5s ease-in-out forwards;
+        }
+    </style>
+</head>
+<body class="font-sans flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 text-center">
+        <span class="text-green-600">Pix</span><span class="text-gray-800">Api</span>
+    </h1>
+    <h2 class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 sm:mb-8 text-center">Transaction confirmed</h2>
+    
+    <div class="mb-8">
+        <svg class="w-16 h-16 text-green-500 animate-checkmark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+    </div>
+    
+    <button onclick="generateReceipt()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105">
+        Generate Receipt
+    </button>
+
+    <script>
+        function generateReceipt() {
+            // Add logic to generate receipt
+            alert('Receipt generation functionality to be implemented');
+        }
+    </script>
+</body>
+</html>

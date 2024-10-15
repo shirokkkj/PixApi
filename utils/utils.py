@@ -6,8 +6,15 @@ import json
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 import os
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+import base64
 
 load_dotenv()
+
+key_64 = f'{os.getenv('KEY')}'# 32 bytes for AES-256
+key = bytes.fromhex(key_64)
+iv = f'{os.getenv('IV')}'.encode('utf-8')
 
 
 def update_user_balance(redis_connection, user_id, amount, is_payer=True):
@@ -39,16 +46,16 @@ def check_password(plain_password, hashed_password):
 
 
 def encrypt_data(data):
-    fernet = Fernet(b'qvxUbHNUIbPapuAssbVZgtjFpHF_YzkEyGPXnftLXEk=')
-    data_encoded = fernet.encrypt(data.encode('utf-8'))
-    
-    return data_encoded
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    parsed_data = pad(data.encode('utf-8'), AES.block_size)
+    encrypted_data = cipher.encrypt(parsed_data)
+    return base64.b64encode(encrypted_data).decode('utf-8')
 
 def uncrypt_data(data):
-    fernet = Fernet(b'qvxUbHNUIbPapuAssbVZgtjFpHF_YzkEyGPXnftLXEk=')
-    data_uncoded = fernet.decrypt(data).decode()
-    
-    return data_uncoded
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    encrypted = base64.b64decode(data)
+    padded_message = cipher.decrypt(encrypted)
+    return unpad(padded_message, AES.block_size).decode('utf-8')
 
 def verify_data(stored_data, data):
     data_encryptografed = encrypt_data(data)

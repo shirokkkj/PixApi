@@ -5,7 +5,7 @@ import uuid
 from utils.utils import update_user_balance, encrypt_data
 from config import redis_connection
 import datetime
-
+import json
 
 pix_controller = Blueprint('pix_controller', __name__)
 
@@ -64,10 +64,9 @@ def make_cpf_pix():
     
     
     if form.validate_on_submit():
-        print(encrypt_data(form.pix_key.data))
         transation = User.make_transaction_by_cpf(session.get('user_id'), form.pix_key.data, form.amount.data)
         payer = User.find_by_id(session.get('user_id'))
-        payee = User.find_by_cpf(form.pix_key.data)
+        payee = User.find_by_cpf(encrypt_data(form.pix_key.data))
         
         if transation['status'] == 'success':
             transaction_id = str(uuid.uuid4())
@@ -105,7 +104,7 @@ def make_email_pix():
     if form.validate_on_submit():
         transation = User.make_transaction_by_email(session.get('user_id'), form.pix_key.data, form.amount.data)
         payer = User.find_by_id(session.get('user_id'))
-        payee = User.find_by_email(form.pix_key.data)
+        payee = User.find_by_email(encrypt_data(form.pix_key.data))
         
         if transation['status'] == 'success':
             transaction_id = str(uuid.uuid4())
@@ -144,7 +143,7 @@ def make_phone_pix():
         print(encrypt_data(form.pix_key.data))
         transation = User.make_transaction_by_phone(session.get('user_id'), form.pix_key.data, form.amount.data)
         payer = User.find_by_id(session.get('user_id'))
-        payee = User.find_by_phone(form.pix_key.data)
+        payee = User.find_by_phone(encrypt_data(form.pix_key.data))
         
         if transation['status'] == 'success':
             transaction_id = str(uuid.uuid4())

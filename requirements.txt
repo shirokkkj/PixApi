@@ -1,3 +1,4 @@
+cryptography==43.0.1
 Flask==3.0.3
 flask_sqlalchemy==3.1.1
 flask_wtf==1.2.1
@@ -6,3 +7,5 @@ python-dotenv==1.0.1
 python_bcrypt==0.3.2
 redis==5.0.8
 WTForms==3.1.2
+mysql-connector-python
+PyMySQL

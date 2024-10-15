@@ -5,6 +5,7 @@ from entry_forms.forms import PasswordConfirmForm
 import bcrypt
 from config import db
 from config import redis_connection
+from socketio_configs import send_notification
 
 pix_keys_controller = Blueprint('pix_keys_controller', __name__)
 
@@ -29,7 +30,7 @@ def cpf_key_form():
 @pix_keys_controller.route('/cadaster-cpf-key', methods=['POST'])
 def cadaster_cpf_key():
     form = PasswordConfirmForm()
-    user_data = User.get_user_data(session.get('user_id'))
+    user_data = User.find_by_id(session.get('user_id'))
     
     if form.validate_on_submit():
         if check_password(form.password.data, user_data.password):
@@ -61,6 +62,7 @@ def phone_key_form():
         registered = True
     
     uncrypted_phone = uncrypt_data(phone)
+    send_notification(1, user_data.name, 12,'Confirme a Transação.')
     return render_template('phone_key_form.html', phone=uncrypted_phone, form=form, title=title, paragraph=paragraph, registered=registered)
 
 @pix_keys_controller.route('/cadaster-phone-key', methods=['POST'])
